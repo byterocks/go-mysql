@@ -6,6 +6,7 @@ import (
 )
 
 type EventHandler interface {
+    OnStart(c *Canal) error
     OnRotate(roateEvent *replication.RotateEvent) error
     // OnTableChanged is called when the table is created, altered, renamed or dropped.
     // You need to clear the associated data like cache with the table.
@@ -23,6 +24,7 @@ type EventHandler interface {
 type DummyEventHandler struct {
 }
 
+func (h *DummyEventHandler) OnStart(c *Canal) error                           { return nil }
 func (h *DummyEventHandler) OnRotate(*replication.RotateEvent) error          { return nil }
 func (h *DummyEventHandler) OnTableChanged(schema string, table string) error { return nil }
 func (h *DummyEventHandler) OnDDL(nextPos mysql.Position, queryEvent *replication.QueryEvent) error {

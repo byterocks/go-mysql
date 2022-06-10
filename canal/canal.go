@@ -214,6 +214,10 @@ func (c *Canal) run() error {
 	}()
 
 	c.master.UpdateTimestamp(uint32(time.Now().Unix()))
+	err := c.eventHandler.OnStart(c)
+	if err != nil {
+		return errors.Trace(err)
+	}
 
 	if !c.dumped {
 		c.dumped = true
