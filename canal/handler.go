@@ -30,7 +30,7 @@ func (h *DummyEventHandler) OnDDL(nextPos mysql.Position, queryEvent *replicatio
 }
 func (h *DummyEventHandler) OnRow(*RowsEvent) error                                { return nil }
 func (h *DummyEventHandler) OnXID(mysql.Position) error                            { return nil }
-func (h *DummyEventHandler) OnGTID(mysql.GTIDSet) error                            { return nil }
+func (h *DummyEventHandler) OnGTID(mysql.GTIDSet, *replication.BinlogEvent) error                            { return nil }
 func (h *DummyEventHandler) OnPosSynced(mysql.Position, mysql.GTIDSet, bool) error { return nil }
 
 func (h *DummyEventHandler) String() string { return "DummyEventHandler" }
