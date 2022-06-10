@@ -115,7 +115,7 @@ func (c *Canal) runSyncBinlog() error {
 		case *replication.XIDEvent:
 			savePos = true
 			// try to save the position later
-			if err := c.eventHandler.OnXID(pos); err != nil {
+			if err := c.eventHandler.OnXID(pos, ev); err != nil {
 				return errors.Trace(err)
 			}
 			if e.GSet != nil {
